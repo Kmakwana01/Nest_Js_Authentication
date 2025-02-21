@@ -8,7 +8,7 @@ import { Session } from 'src/authentication/entities/session.entity';
 let secretKey: string;
 
 try {
-  secretKey = fs.readFileSync(path.resolve(__dirname, '../../../jwtRS256.key'), 'utf8').trim();
+  secretKey = fs.readFileSync(path.resolve(__dirname, '../../jwtRS256.key'), 'utf8').trim();
 } catch (error) {
   console.error('Error reading secret key file:', error);
 }
