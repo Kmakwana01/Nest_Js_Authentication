@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "host": "dpg-cus5bc8fnakc73evhn90-a.singapore-postgres.render.com",
+    "port": 5432,
+    "database": "kmakwana",
+    "username": "kmakwana",
+    "password": "7P2vIbLy5FYh35Yie8U6mDrgZDqsMcEn",
+    "dialect": "postgres"
   },
   "test": {
     "username": "root",

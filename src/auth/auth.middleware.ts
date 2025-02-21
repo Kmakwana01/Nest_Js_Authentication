@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import * as fs from 'fs';
 import * as jwt from 'jsonwebtoken';
 import * as path from 'path';
-import { Session } from '../authentication/session.model'; // Adjust the import based on your structure
+import { Session } from 'src/authentication/entities/session.entity';
 
 let secretKey: string;
 

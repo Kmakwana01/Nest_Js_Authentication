@@ -1,9 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { RegisterAuthenticationDto } from './dto/register-authentication.dto';
 import * as bcrypt from 'bcrypt';
-import { User } from './user.model';
-import { Token } from './token.model'; // Import Token model
-import { Session } from './session.model'; // Import Session model
 import { InjectModel } from '@nestjs/sequelize';
 import { LoginAuthenticationDto } from './dto/login-authentication.dto';
 import { Op } from 'sequelize';
@@ -11,10 +8,13 @@ import * as jwt from 'jsonwebtoken'
 import * as fs from 'fs';
 import { constants } from '../config'
 import { ForgetPasswordDto } from './dto/forgetpassword.dto';
-import { UserVerification } from './user_verifications';
 import * as nodemailer from 'nodemailer'
 import { CompareCodeDto } from './dto/compare-code-dto';
 import { ResetPasswordDto } from './dto/reset-password-dto';
+import { User } from './entities/user.entity';
+import { Token } from './entities/token.entity';
+import { Session } from './entities/session.entity';
+import { UserVerification } from './entities/user_verifications.entity';
 
 let secretKey: any;
 try {
@@ -52,7 +52,7 @@ export class AuthenticationService {
 
   async register(RegisterAuthenticationDto: RegisterAuthenticationDto) {
 
-    const { email, mobileNumber, password, profileImage, role, username } = RegisterAuthenticationDto;
+    const { email, mobileNumber, password, profileImage, role , username  } = RegisterAuthenticationDto;
 
     let hashPassword: string | undefined;
 
@@ -201,6 +201,12 @@ export class AuthenticationService {
 
     if (!User) {
       throw new ConflictException('please provide valid email.');
+    }
+
+    const reset = await this.UserVerificationModel.findOne({ where: { email: User.email, verificationCode: ResetPasswordDto?.verificationCode, } });
+
+    if (!reset) {
+      throw new ConflictException("Invalid verification code.");
     }
 
     const oldAndNewPasswordIsSame = await bcrypt.compare(password, User?.password)

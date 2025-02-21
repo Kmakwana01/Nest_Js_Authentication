@@ -1,5 +1,5 @@
 import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { User } from './user.model';  // Assuming User model already exists
+import { User } from './user.entity';
 
 @Table({ tableName: 'tokens', timestamps: true, })
 
