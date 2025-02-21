@@ -1,5 +1,5 @@
 import { Column, Model, Table, DataType, ForeignKey } from 'sequelize-typescript';
-import { User } from './user.model'; // Adjust the path based on your directory structure
+import { User } from './user.entity';
 
 @Table({
   tableName: 'user_verifications', // Set the table name
@@ -18,5 +18,6 @@ export class UserVerification extends Model<UserVerification> {
     allowNull: false,
   })
   verificationCode: number;
+  
 
 }

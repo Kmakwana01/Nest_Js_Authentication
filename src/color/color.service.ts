@@ -2,27 +2,26 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { CreateColorDto } from './dto/create-color.dto';
 import { UpdateColorDto } from './dto/update-color.dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { Color } from './color.model';
 import { Op } from 'sequelize';
+import { color } from './entities/color.entity';
 
 @Injectable()
 export class ColorService {
 
   constructor(
-    @InjectModel(Color)
-    private ColorModel: typeof Color,  // Inject the User model
+    @InjectModel(color)
+    private ColorModel: typeof color,  // Inject the User model
   ) { }
 
   async findAll() {
     const existingColor = await this.ColorModel.findAll();
     return existingColor;
-
   }
 
   async findOne(id: number) {
     const existingColor = await this.ColorModel.findOne({ where: { id } });
     if (!existingColor) {
-      throw new ConflictException('Color not exists.');
+      throw new ConflictException('color not exists.');
     }
     return existingColor;
   }
@@ -34,7 +33,7 @@ export class ColorService {
     });
 
     if (colorWithSameName) {
-      throw new ConflictException('Color name already exists.'); // Throw if name already exists
+      throw new ConflictException('color name already exists.'); // Throw if name already exists
     }
     await this.ColorModel.update({ name: updateColorDto.name, hexCode: updateColorDto.hexCode }, { where: { id } });
     return await this.findOne(id);
@@ -50,7 +49,7 @@ export class ColorService {
     const existingColor = await this.ColorModel.findOne({ where: { name } });
 
     if (existingColor) {
-      throw new ConflictException('Color name already exists.');
+      throw new ConflictException('color name already exists.');
     }
 
     return await this.ColorModel.create({ name, hexCode });

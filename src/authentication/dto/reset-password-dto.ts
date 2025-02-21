@@ -20,4 +20,8 @@ export class ResetPasswordDto {
     @IsNotEmpty({ message: 'Confirmation password is required.' })
     @Length(8, 20, { message: 'Confirmation password must be between 6 and 20 characters.' })
     confirmPassword: string;
+
+    @IsString({ message: 'Verification code must be a string.' })
+    @IsNotEmpty({ message: 'Verification code is required.' })
+    verificationCode: string; // New property for verification code
 }
