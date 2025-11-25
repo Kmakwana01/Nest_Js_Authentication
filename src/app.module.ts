@@ -14,7 +14,7 @@ const config = require('../config/config.json')[env];
   imports: [
     ConfigModule.forRoot(),
     SequelizeModule.forRoot({
-      dialect: 'postgres',
+      dialect: 'mysql',
       host: config.host,
       port: config.port,
       username: config.username,
@@ -24,10 +24,7 @@ const config = require('../config/config.json')[env];
       synchronize: true,
       logging: console.log, // Enable detailed logging for debugging
       dialectOptions: {
-        ssl: {
-          require: true, // Force SSL
-          rejectUnauthorized: false, // Allow self-signed certs (Render uses these)
-        },
+        ssl: false
       },
       retry: {
         max: 10, // Retry up to 10 times

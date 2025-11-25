@@ -1,12 +1,11 @@
 {
   "development": {
-    
-    "host": "dpg-cus5ppt6l47c73agjfgg-a.oregon-postgres.render.com",
-    "port": 5432,
-    "database": "kmakwana_9xd9",
-    "username": "kmakwana",
-    "password": "CljqbVZ39bQ4CTzJm21gY78TGwbrvkDx",
-    "dialect": "postgres"
+    "username": "root",
+    "password": null,
+    "database": "test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "port": 3306
   },
   "test": {
     "username": "root",
